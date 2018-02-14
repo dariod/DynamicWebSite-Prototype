@@ -4,7 +4,7 @@ body {
 
 .dynamicContent-container {
     border-radius: 8px;
-    box-shadow: inset 0px 0px 16px 2px white;
+    box-shadow: inset 0px 0px 16px 2px silver;
     background-color: black;
     display: flex;
     height: 100%;
