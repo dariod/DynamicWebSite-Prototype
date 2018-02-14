@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dynamic Content Load Prototype</title>
+        <link rel="stylesheet" href="css/master.css">
+    </head>
+    <body>
+        <nav>
+            <p>Click on a link to load the corresponding content without reloading the entire page.</p>
+            <ul>
+                <li><a class="dyn-content-trigger" target="dynamicContent" href="https://en.wikipedia.org/wiki/Philip_K._Dick">Philip K. Dick</a></li>
+                <li><a class="dyn-content-trigger" target="dynamicContent" href="https://en.wikipedia.org/wiki/Kurt_Vonnegut">Kurt Vonnegut</a></li>
+            </ul>
+        </nav>
+        <div class="dynamicContent-container">
+            <iframe name="dynamicContent" src="">
+                Nothing loaded
+            </iframe>
+        </div>
+        <script type="text/javascript" src="scripts/responsive-iframe.js"></script>
+    </body>
+</html>
