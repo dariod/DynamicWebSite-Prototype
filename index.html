@@ -4,22 +4,37 @@
         <meta charset="utf-8">
         <title>Dynamic Content Load Prototype</title>
         <link rel="stylesheet" href="css/master.css">
+        <script type="text/javascript" src="scripts/responsive-iframe.js"></script>
+        <!-- <script type="text/javascript" src="scripts/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
+        <script type="text/javascript" src="scripts/jquery-3.3.1.min.js"></script>
     </head>
     <body>
+        <p>You might want to open the Javascript console (it's in the browser's Developer Tools) to see any error, warning.</p>
         <nav>
-            <p>Click on a link to load the corresponding content without reloading the entire page.</p>
+            <p>Click on a link to load the corresponding content in the &lt;iframe&gt; element below without reloading the entire page.</p>
             <ul>
-                <li><a class="dyn-content-trigger" target="dynamicContent" href="local-content-1.html">Local content #1</a></li>
-                <li><a class="dyn-content-trigger" target="dynamicContent" href="local-content-2.html">Local content #2</a></li>
-                <li><a class="dyn-content-trigger" target="dynamicContent" href="https://en.wikipedia.org/wiki/Philip_K._Dick">Wikipedia: Philip K. Dick</a></li>
-                <li><a class="dyn-content-trigger" target="dynamicContent" href="https://en.wikipedia.org/wiki/Kurt_Vonnegut">Wikipedia: Kurt Vonnegut</a></li>
+                <li><a target="dynamicContent" href="local-content-1.html">Local content #1</a></li>
+                <li><a target="dynamicContent" href="local-content-2.html">Local content #2</a></li>
+                <li><a target="dynamicContent" href="https://en.wikipedia.org/wiki/Philip_K._Dick">Wikipedia: Philip K. Dick</a></li>
+                <li><a target="dynamicContent" href="https://en.wikipedia.org/wiki/Kurt_Vonnegut">Wikipedia: Kurt Vonnegut</a></li>
+            </ul>
+            <p>Click on the following to try load them using jQuery .load() method in the &lt;div&gt; element below.</p>
+            <ul>
+                <li onclick="$('#jQueryContent').load('local-content-1.html')">Local content #1</li>
+                <li onclick="$('#jQueryContent').load('local-content-2.html')">Local content #2</li>
+                <li onclick="$('#jQueryContent').load('https://en.wikipedia.org/wiki/Philip_K._Dick')">Wikipedia: Philip K. Dick</li>
+                <li onclick="$('#jQueryContent').load('https://en.wikipedia.org/wiki/Kurt_Vonnegut')">Wikipedia: Kurt Vonnegut</li>
             </ul>
         </nav>
-        <div class="dynamicContent-container">
-            <iframe name="dynamicContent" src="">
-                Nothing loaded
-            </iframe>
+        <div class="row">
+            <div class="dynamicContent-container">
+                <iframe name="dynamicContent" src="">
+                    Nothing loaded
+                </iframe>
+            </div>
+            <div id="jQueryContent" class="dynamicContent-container-jquery">
+                    jQuery .load() target: nothing loaded
+            </div>
         </div>
-        <script type="text/javascript" src="scripts/responsive-iframe.js"></script>
     </body>
 </html>

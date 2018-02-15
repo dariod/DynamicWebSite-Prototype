@@ -1,6 +1,8 @@
 function fitContainerHeightToWindowHeight(element) {
     let bodyStyles=window.getComputedStyle(document.body)
-    let height=window.innerHeight
+    let baseHeight=document.body.offsetHeight > window.innerHeight?
+                    document.body.offsetHeight:window.innerHeight
+    let height=baseHeight
                  - parseFloat(bodyStyles.marginBottom)
                  - parseFloat(bodyStyles.paddingBottom)
                  - element.offsetTop
