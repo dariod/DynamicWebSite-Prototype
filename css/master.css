@@ -14,22 +14,10 @@ body {
     margin-right: 2px;
     height: 100%;
     overflow: hidden;
-    width: 50%;
+    width: 100%;
 }
 iframe {
     height: 100%;
     width: 100%;
     border: unset;
-}
-
-
-.dynamicContent-container-jquery {
-    border-radius: 8px;
-    box-shadow: inset 0px 0px 16px 2px silver;
-    background-color: black;
-    display: inline-flex;
-    margin-left: 2px;
-    height: 100%;
-    overflow: hidden;
-    width: 50%;
 }
