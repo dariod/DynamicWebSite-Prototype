@@ -6,34 +6,61 @@
         <link rel="stylesheet" href="css/master.css">
         <script type="text/javascript" src="scripts/responsive-iframe.js"></script>
         <!-- <script type="text/javascript" src="scripts/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script> -->
-        <script type="text/javascript" src="scripts/jquery-3.3.1.min.js"></script>
+        <script>
+            //  Global variable to track wether or not a document has been loaded
+            var iframeDidLoad=false
+
+            // Links that load the iframe shgiuld call this function
+            function iframeLoad(src) {
+
+                // Initialize loading tracker
+                iframeDidLoad = false
+
+                // Prevent default link action
+                event.preventDefault()
+
+                // Try to load the iframe
+                targetIframe=document.getElementById('targetIframe')
+                let previousSrc=targetIframe.src
+                targetIframe.src=src
+
+                // After setting the iframe, lets wait for a reasonable interval then run the
+                // function that checks if the iframe onload event has been fired.
+                // The event should not be fired for missing local files, meaning that if a local
+                // file is missing, the global variable will be false after the wait.
+                setTimeout(handleOnLoadError, 1000)
+                function handleOnLoadError() {
+                    if (! iframeDidLoad) {
+                        // If the global variable is not set, the iframe did not load, let's do something about it.
+                        alert(`Oh no! Something went wrong with loading ${src}. Going to previous page (${previousSrc})`)
+                        targetIframe.src = previousSrc
+                    }
+                }
+            }
+            // Every time the iframe gets loaded, set the global variable.
+            function  iframeOnLoad() {
+                console.log('iframe loaded.')
+                iframeDidLoad = true
+            }
+        </script>
     </head>
     <body>
         <p>You might want to open the Javascript console (it's in the browser's Developer Tools) to see any error, warning.</p>
         <nav>
             <p>Click on a link to load the corresponding content in the &lt;iframe&gt; element below without reloading the entire page.</p>
             <ul>
-                <li><a target="dynamicContent" href="local-content-1.html">Local content #1</a></li>
-                <li><a target="dynamicContent" href="local-content-2.html">Local content #2</a></li>
+                <li><a onclick="iframeLoad('local-content-1.html')" href="">Local content #1</a></li>
+                <li><a onclick="iframeLoad('local-content-2.html')" href="">Local content #2</a></li>
+                <li><a onclick="iframeLoad('local-missing-content.html')" href="">Non existing local content.</a></li>
                 <li><a target="dynamicContent" href="https://en.wikipedia.org/wiki/Philip_K._Dick">Wikipedia: Philip K. Dick</a></li>
                 <li><a target="dynamicContent" href="https://en.wikipedia.org/wiki/Kurt_Vonnegut">Wikipedia: Kurt Vonnegut</a></li>
-            </ul>
-            <p>Click on the following to try load them using jQuery .load() method in the &lt;div&gt; element below.</p>
-            <ul>
-                <li onclick="$('#jQueryContent').load('local-content-1.html')">Local content #1</li>
-                <li onclick="$('#jQueryContent').load('local-content-2.html')">Local content #2</li>
-                <li onclick="$('#jQueryContent').load('https://en.wikipedia.org/wiki/Philip_K._Dick')">Wikipedia: Philip K. Dick</li>
-                <li onclick="$('#jQueryContent').load('https://en.wikipedia.org/wiki/Kurt_Vonnegut')">Wikipedia: Kurt Vonnegut</li>
             </ul>
         </nav>
         <div class="row">
             <div class="dynamicContent-container">
-                <iframe name="dynamicContent" src="">
+                <iframe   id="targetIframe" name="dynamicContent" onload="iframeOnLoad()">
                     Nothing loaded
                 </iframe>
-            </div>
-            <div id="jQueryContent" class="dynamicContent-container-jquery">
-                    jQuery .load() target: nothing loaded
             </div>
         </div>
     </body>
